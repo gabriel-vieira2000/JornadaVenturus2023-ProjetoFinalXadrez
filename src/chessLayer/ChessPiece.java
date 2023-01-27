@@ -13,20 +13,12 @@ public class ChessPiece extends Piece{
 		this.color = color;
 		this.moveCount = 0;
 	}
-
-	public ChessPosition getChessPosition() {
-		
-	}
 	
-	protected boolean isThereOpponentPiece(Position position) {
-		return false;
-	}
-	
-	protected void increaseMoveCount() {
+	public void increaseMoveCount() {
 		this.moveCount++;
 	}
 	
-	protected void decreaseMoveCount() {
+	public void decreaseMoveCount() {
 		this.moveCount--;
 	}
 

@@ -1,23 +1,50 @@
 package boardLayer;
 
+import chessLayer.ChessPiece;
+
 public class Board {
 	private int rows;
 	private int columns;
-	private Piece[][] pieces;
+	private ChessPiece[][] pieces;
 	
 	
 	public Board(int rows, int columns) {
 		super();
 		this.rows = rows;
 		this.columns = columns;
-		this.pieces = new Piece[rows][columns];
+		this.pieces = new ChessPiece[rows][columns];
 	}
 	
-	public Piece piece(int row, int column) {
+	public void placePiece(ChessPiece piece, Position position) {
+		if(!positionExists(position)) {
+			new BoardException("The position chosed is invalid! Please, choose another!");
+		}
+		else if(thereIsAPiece(position) && piece != null) {
+			new BoardException("In this position chosed has a piece! Please, choose another!");
+		}
+		else{
+			System.out.println(piece);
+			if(piece != null) this.pieces[position.getRow()][position.getColumn()] = piece;
+			else this.pieces[position.getRow()][position.getColumn()] = null;
+			System.out.println(this.pieces[position.getRow()][position.getColumn()]);
+		}
+	}
+	
+	public boolean positionExists(Position position) {
+		if(position.getRow() >= this.rows || position.getRow() < 0 || position.getColumn() >= this.columns || position.getColumn() < 0) return false;
+		else return true;
+	}
+	
+	public boolean thereIsAPiece(Position position) {
+		if(this.pieces[position.getRow()][position.getColumn()] != null) return true;
+		else return false;
+	}
+	
+	public ChessPiece piece(int row, int column) {
 		return this.pieces[row][column];
 	}
 	
-	public Piece piece(Position position) {
+	public ChessPiece piece(Position position) {
 		return this.pieces[position.getRow()][position.getColumn()];
 	}
 	
